@@ -1,9 +1,7 @@
 # PlanningPoker
-==============================
 For use in distributed Agile SCRUM teams for estimating story points.
 
 ##Installation
-----------
 git clone  https://github.com/alexellis/PlanningPoker.git
 
 cd PlanningPoker
@@ -11,7 +9,6 @@ cd PlanningPoker
 npm install
 
 ## Running the software
-----------
 node app
 
 Open a browser and point it to http://localhost:3000/dealer.js - enter a user story.
