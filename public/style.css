@@ -1,0 +1,17 @@
+body{
+    font-family:Helvetica;
+}
+
+.cards{
+	margin-bottom: 10px;
+}
+.card{
+	display: inline-block;
+	border-width: 1px;
+	font-size: 18pt;
+	border-style: dashed;
+	padding: 10px 10px 10px 10px;
+}
+.hover-card {
+	background-color: yellow;
+}

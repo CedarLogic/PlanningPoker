@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="jquery-2.1.3.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="common.js"></script>
+		<script src="member.js"></script>
+
+	</head>
+	<body>
+		<p>Welcome to the poker session</p>
+
+		<p>Story: <span id="storyName">Not started yet</span></p>
+
+		<p>Pick your card:</p>
+		<div id="cards" class="cards">
+			<div id="card1" class="card">1</div>
+			<div id="card2" class="card">2</div>
+			<div id="card3" class="card">3</div>
+			<div id="card4" class="card">5</div>
+			<div id="card5" class="card">8</div>
+			<div id="card6" class="card">13</div>
+			<div id="card7" class="card">20</div>
+			<div id="card8" class="card">40</div>
+			<div id="card9" class="card">100</div>
+		</div>
+
+		<input type="button" id="layCard" value="Lay card"></input>
+		<p>Points in by team: </p>
+		<div id="cardResults" class="cards">
+
+		</div>
+	</body>
+</html>
