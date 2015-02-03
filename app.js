@@ -34,11 +34,8 @@ socket.on('command',
                     story: data['story']
                     });
 		}
-		else if(commandType == 'selected-card') {
+		else if(commandType == 'selected-card' || commandType == 'show-cards' || commandType == 'player-joined') {
 			io.emit('command', data);	
-		}
-		else if(commandType == 'show-cards') {
-			io.emit('command',data);
 		}
 	});
 });

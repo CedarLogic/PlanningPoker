@@ -1,7 +1,9 @@
 var clicked = 0;
 var cardLayed = false;
-
+var myNameValue;
 function postLoad() {
+
+	$("#gamePlay").css('display','none');
 
 	var removeClasses=function (clearAll){
 		for(var i=1;i<totalCards;i++) {
@@ -11,6 +13,28 @@ function postLoad() {
 			}
 		}
 	}
+
+	var joinGame = function(name) {
+		socket.emit('command',
+	        {
+	            type : 'player-joined',
+	            name: name
+	        });
+	};
+
+	$("#join").click(function() {
+		var val=$("#myName").val();
+		if(val=="") {
+			alert("Enter a valid name");
+		} else {
+
+			myNameValue=val;
+			$("#enterName").css( "display", "none" );
+			$("#gamePlay").css('display','inline');
+			joinGame(myNameValue);
+		}
+	});
+
 	socket.on('command', function(data) {
         var commandType = data['type'];
 		if(commandType == 'game-started'){
@@ -32,6 +56,7 @@ function postLoad() {
 		}
 	});
 
+	
 	$("#layCard").click(function() {
 		if(cardLayed) {
 			alert('Your card is layed, wait until everyone has taken their turn.');
@@ -41,7 +66,8 @@ function postLoad() {
 			socket.emit('command',
                         {
                             type : 'selected-card',
-                            points: $("#card"+clicked).text()
+                            points: $("#card"+clicked).text(),
+                            name: myNameValue
                         });
 			$("#layCard").attr("value", "Wait..");
 		}
