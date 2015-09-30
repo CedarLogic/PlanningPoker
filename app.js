@@ -6,9 +6,10 @@ var io = require('socket.io')(http);
 var n=0;
 
 app.use("/", express.static(__dirname + "/public"));
-
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+app.use("/bower_components", express.static(__dirname + "/bower_components"));
+var port=8000;
+http.listen(port, function(){
+  console.log("Listening on port "+port+", http://localhost:"+port+"/");
 });
 
 io.on('connection',function (socket) {

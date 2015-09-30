@@ -1,18 +1,23 @@
 var clicked = 0;
 var cardLayed = false;
 var myNameValue;
+
 function postLoad() {
 
-	$("#gamePlay").css('display','none');
+    var init = function init() {
+		$("#gamePlay").hide();
+		$("#waitingStart").hide();
+	};
+	init();
 
-	var removeClasses=function (clearAll){
-		for(var i=1;i<totalCards;i++) {
-			if(clearAll|| i!=clicked)
+	var removeClasses = function (clearAll) {
+		for(var i = 1; i < totalCards; i++) {
+			if(clearAll || i != clicked)
 			{
 				$("#card"+i).removeClass("hover-card");
 			}
 		}
-	}
+	};
 
 	var joinGame = function(name) {
 		socket.emit('command',
@@ -21,24 +26,25 @@ function postLoad() {
 	            name: name
 	        });
 	};
-
 	$("#join").click(function() {
-		var val=$("#myName").val();
-		if(val=="") {
+		var val = $("#myName").val();
+		if(val == "") {
 			alert("Enter a valid name");
 		} else {
-
-			myNameValue=val;
-			$("#enterName").css( "display", "none" );
-			$("#gamePlay").css('display','inline');
+			myNameValue = val;
+			$("#enterName").hide();
+			$("#waitingStart").show();
 			joinGame(myNameValue);
 		}
 	});
 
 	socket.on('command', function(data) {
         var commandType = data['type'];
-		if(commandType == 'game-started'){
+		if(commandType == 'game-started') {
+			$("#cards").show();
 			alert('Dealer just started a new game.');
+			$("#gamePlay").css('display', 'inline');
+			$("#waitingStart").hide();
 			removeClasses(true);
 			clicked = 0;
 			cardLayed=false;

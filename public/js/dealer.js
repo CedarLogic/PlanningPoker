@@ -2,6 +2,24 @@ var received=[];
 
 
 function postLoad() {
+
+	var init = function init() {
+		$("#gameStartForm").show();
+		$("#gameInstructions").hide();
+		$("#playArea").hide();
+		$("#showCards").prop("disabled",true);
+	};
+
+	$("#startGame").click(function() {
+		if($("#gameName").val()==""){
+			alert("What's the name of the game?");
+		}else {
+			$("#gameStartForm").toggle();
+			$("#gameInstructions").toggle();
+			$("#playArea").toggle();
+		}
+	});
+
 	$("#play").click(function() {
 		alert("Let the game begin");
 		socket.emit('command', 
@@ -20,6 +38,7 @@ function postLoad() {
 			received.push(points);
 
 			$("#pointsInByPlayer").append("<li>"+data['name']+"</li>");
+			$("#showCards").prop("disabled",null);
 
 		} else if(data['type']=='player-joined') {
 			var joinedName=data['name'];
@@ -39,7 +58,10 @@ function postLoad() {
                             type : 'show-cards',
                             cards : received
                         });
+			$(this).prop("disabled",true);
 		}
 	});
+
+	init();
 }
 

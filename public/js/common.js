@@ -5,7 +5,7 @@ $(document).ready( function(){
 	socket = io();
 
 	socket.on('client connected', function(data){
-		alert("Connected to server");
+		console.log("Client connected to server.");
 	});
 	if(postLoad){
 		postLoad();
